@@ -12,7 +12,7 @@ if (!JWT_SECRET) throw new Error("JWT_SECRET is not defined");
 if (!REFRESH_SECRET) throw new Error("REFRESH_SECRET is not defined");
 
 export const generateAccessToken = (userId: string): string => {
-  return jwt.sign({ userId }, JWT_SECRET, { expiresIn: EXPIRES_IN });
+  return jwt.sign({ id: userId }, JWT_SECRET, { expiresIn: EXPIRES_IN });
 };
 
 export const generateRefreshToken = (userId: string): string => {
@@ -21,7 +21,7 @@ export const generateRefreshToken = (userId: string): string => {
   });
 };
 
-export const verifyToken = (token: string) => {
+export const verifyAccessToken = (token: string) => {
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
     return decoded;
