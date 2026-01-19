@@ -1,0 +1,92 @@
+openapi: 3.0.0
+info:
+  title: Real-Time API Documentation
+  version: 1.0.0
+  description: API Documentation for Real-Time chat system
+
+servers:
+  - url: http://localhost:5000
+    description: Development server
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []
+
+paths:
+  /api/v1/auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [firstName, lastName, userName, email, password]
+              properties:
+                firstName: { type: string }
+                lastName: { type: string }
+                userName: { type: string }
+                email: { type: string }
+                password: { type: string }
+      responses:
+        201:
+          description: User created successfully
+  /api/v1/auth/login:
+    post:
+      tags:
+        - Auth
+      summary: User login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email: { type: string }
+                password: { type: string }
+      responses:
+        200:
+          description: Login successful
+  /api/v1/conversations:
+    get:
+      tags:
+        - Conversations
+      summary: Get all conversations for the logged-in user
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Conversations fetched successfully
+    post:
+      tags:
+        - Conversations
+      summary: Create or get a 1-to-1 conversation
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [participantId]
+              properties:
+                participantId:
+                  {
+                    type: string,
+                    description: "The ID of the user to chat with",
+                  }
+      responses:
+        201:
+          description: Conversation ready

@@ -21,3 +21,17 @@ export const conversationCreate = asyncHandler(
     sendResponse(res, 201, "Conversation ready", conversation);
   },
 );
+
+export const getMyConversations = asyncHandler(
+  async (req: Request, res: Response, _next: NextFunction) => {
+    const myId = req.user?._id;
+
+    const conversations = await Conversation.find({
+      participants: myId,
+    })
+      .populate("participants", "userName email")
+      .populate("lastMessage");
+
+    sendResponse(res, 200, "Conversation fetched", conversations);
+  },
+);
