@@ -1,21 +1,18 @@
 # 🚀 Real-Time Chat API
 
-A professional, high-performance real-time chat infrastructure built with **TypeScript**, **Express**, **Socket.io**, **MongoDB**, and **Redis**. This project follows a comprehensive 14-day production-ready roadmap.
+A professional, high-performance real-time chat infrastructure built with **TypeScript**, **Express**, **Socket.io**, and **MongoDB**. This project follows a comprehensive production-ready roadmap.
 
 ---
 
 ## 📦 Tech Stack
 
-- **Lagnuage:** TypeScript
+- **Language:** TypeScript
 - **Framework:** Express.js
 - **Real-time:** Socket.io
 - **Database:** MongoDB (with Mongoose)
-- **Caching & State:** Redis
 - **Validation:** Zod
-- **Authentication:** JWT & Bcrypt.js
-- **Testing:** Jest & Supertest
-- **Logging:** Winston
-- **Security:** Helmet, Rate Limiting, CORS
+- **Authentication:** JWT (Access & Refresh Tokens) & Bcrypt.js
+- **Security:** Helmet, CORS
 - **Documentation:** Swagger (OpenAPI)
 
 ---
@@ -24,76 +21,51 @@ A professional, high-performance real-time chat infrastructure built with **Type
 
 ### 🔐 Authentication & Security
 
-- **Secure Auth:** JWT-based authentication with password hashing (Bcrypt).
-- **Validation:** Strict input validation using Zod.
-- **Middleware:** Protected routes via Auth middleware.
-- **Security Headers:** Helmet for specialized HTTP headers.
-- **Rate Limiting:** Protect against brute-force (100 req/15min).
+- **[x] Secure Auth:** JWT-based authentication with password hashing (Bcrypt).
+- **[x] Dual Tokens:** Access and Refresh token implementation for secure sessions.
+- **[x] Validation:** Strict input validation using Zod schemas.
+- **[x] Security Headers:** Helmet for specialized HTTP headers.
+- **[x] CORS:** Configured for secure cross-origin requests.
 
-### 💬 Messaging Capabilities
+### 💬 Messaging & Conversations
 
-- **Real-time Delivery:** Instant message relay using Socket.io.
-- **History:** Retrieve chat history via optimized REST endpoints.
-- **Delivery Status:** Sent ➔ Delivered ➔ Read indicators.
-- **Typing Indicators:** Real-time feedback when users are typing.
-
-### 👥 Presence & State
-
-- **Online/Offline Status:** Track user connectivity status using Redis.
-- **Caching:** User data and session management optimized with Redis for 70% better performance.
-- **Unread Counters:** efficient tracking of missed messages.
+- **[x] Real-time Delivery:** Instant message relay using Socket.io.
+- **[x] Message Persistence:** Messages are stored in MongoDB.
+- **[x] Conversation Management:** Full CRUD operations for chat rooms/conversations.
+- **[x] Online Tracking:** Track user connectivity status in real-time.
 
 ### 🛠 Reliability & Performance
 
-- **Logging:** Centralized error handling and logging with Winston.
-- **Optimization:** MongoDB indexing and Redis caching strategy.
-- **Connectivity:** Connection pooling and health checks.
+- **[x] Error Handling:** Centralized middleware for consistent error responses.
+- **[x] API Documentation:** Interactive Swagger UI documentation.
+- **[x] Scalable Structure:** Modular folder architecture for controllers, services, and routes.
 
 ---
 
-## 🗺 14-Day Roadmap
+## 🗺 Roadmap Progress
 
-### Week 1: Core Features
+### ✅ Phase 1: Core Foundation & Auth
 
-- **Day 1-2: Project Setup & Auth**
-  - Project initialization with TypeScript.
-  - User Model (username, email, password, isOnline).
-  - Register/Login endpoints with JWT generation.
-- **Day 3-4: Socket.io & Messaging**
-  - Socket.io integration with Auth middleware.
-  - Message Model (from, to, content, timestamp).
-  - Events: `send-message`, `new-message`.
-- **Day 5: Polish & Status**
-  - Online/Offline tracking.
-  - Typing indicators & delivery status.
-  - Centralized error handling & logging.
+- [x] Project initialization with TypeScript & ES Modules.
+- [x] MongoDB connection & configuration.
+- [x] User Model & Auth routes (Register/Login).
+- [x] JWT Access & Refresh token logic.
+- [x] Input validation middleware with Zod.
 
-### Week 2: Modern Tech & Testing
+### ✅ Phase 2: Messaging & Real-Time
 
-- **Day 6-7: Redis Integration**
-  - Online users tracking in Redis sets.
-  - Caching user data and typing indicators.
-  - Session management implementation.
-- **Day 8-9: Comprehensive Testing**
-  - Target: **80%+ Coverage**.
-  - Unit tests for Services & Utils.
-  - Integration tests for REST & Socket events.
-- **Day 10: Documentation**
-  - Swagger UI setup.
-  - Detailed `SOCKET_EVENTS.md`.
+- [x] Socket.io integration with the server.
+- [x] Message persistence with MongoDB.
+- [x] Real-time events (send-message, user-status).
+- [x] Conversation management (Rooms/Direct Chats).
 
-### Week 3: Production Ready
+### 🚀 Phase 3: Documentation & Polish
 
-- **Day 11-12: Security & Performance**
-  - Rate limiting, CORS, NoSQL injection prevention.
-  - Pagination for message history.
-  - MongoDB/Redis query optimization.
-- **Day 13: Deployment**
-  - Setup for Railway/Railway-like environments.
-  - MongoDB Atlas & Redis Cloud integration.
-- **Day 14: Final Polish**
-  - Code review and JSDoc comments.
-  - Live testing and demo preparation.
+- [x] Swagger UI integration with YAML configuration.
+- [x] Conversation retrieval endpoints.
+- [ ] Redis integration for caching & presence (Next Step).
+- [ ] Unit & Integration testing (Jest/Supertest).
+- [ ] Production deployment setup.
 
 ---
 
@@ -101,15 +73,14 @@ A professional, high-performance real-time chat infrastructure built with **Type
 
 ### Prerequisites
 
-- Node.js (v16+)
+- Node.js (v18+)
 - MongoDB
-- Redis
 
 ### Installation
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/MohamedAbdElsamieCoding/Real-Time-API.git
    cd Real-Time-API
    ```
 2. Install dependencies:
@@ -125,45 +96,29 @@ A professional, high-performance real-time chat infrastructure built with **Type
 
 ---
 
+## 📡 API Documentation
+
+Once the server is running, you can access the interactive Swagger documentation at:
+`http://localhost:5000/api-docs`
+
+---
+
 ## 📡 Socket.io Events
 
 | Event           | Direction       | Description                |
 | :-------------- | :-------------- | :------------------------- |
 | `send-message`  | Client ➔ Server | Send a new message         |
 | `new-message`   | Server ➔ Client | Receives a new message     |
-| `typing`        | Client ➔ Server | Notify user is typing      |
-| `stop-typing`   | Client ➔ Server | Notify user stopped typing |
 | `status-update` | Server ➔ Client | User online/offline update |
-
----
-
-## 🛠 Testing
-
-Run the test suite using Jest:
-
-```bash
-npm test
-npm run test:coverage
-```
 
 ---
 
 ## 🏥 Health Check
 
-**Endpoint:** `GET /health`
-**Response:**
-
-```json
-{
-  "status": "ok",
-  "mongodb": "connected",
-  "redis": "connected",
-  "uptime": 12345
-}
-```
+**Endpoint:** `GET /api/v1/auth/health` (or check individual service status)
 
 ---
 
 ## 📜 License
 
-MIT License. Created for the Real-Time API 14-Day Challenge.
+MIT License.
