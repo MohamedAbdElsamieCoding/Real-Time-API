@@ -9,14 +9,14 @@ export function chatSocket(io: Server) {
     });
 
     socket.on("chat:send", async (data) => {
-      const { roomId, content } = data;
+      const { conversationId, content } = data;
       const userId = socket.data.user.id;
       try {
         const newMessage = await Message.create({
           userId: userId,
           content: content,
         });
-        io.to(roomId).emit("chat:received", {
+        io.to(conversationId).emit("chat:received", {
           id: newMessage._id,
           content: newMessage.content,
           userId: newMessage.userId,
