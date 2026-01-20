@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import { verifyAccessToken } from "../utils/jwt";
+import { verifyAccessToken } from "../utils/jwt.js";
 
 export const socketAuth = (io: Server) => {
   io.use((socket, next) => {

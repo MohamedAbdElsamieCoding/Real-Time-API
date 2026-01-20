@@ -5,10 +5,10 @@ import YAML from "yamljs";
 import swaggerUi from "swagger-ui-express";
 import path from "path";
 
-import { errorHandler } from "./middlewares/error-handler";
+import { errorHandler } from "./middlewares/error-handler.js";
 
-import authRouter from "./routes/auth.route";
-import conversationRouter from "./routes/conversation.route";
+import authRouter from "./routes/auth.route.js";
+import conversationRouter from "./routes/conversation.route.js";
 
 const app = express();
 

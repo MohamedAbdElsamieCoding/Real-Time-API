@@ -63,8 +63,8 @@ A professional, high-performance real-time chat infrastructure built with **Type
 
 - [x] Swagger UI integration with YAML configuration.
 - [x] Conversation retrieval endpoints.
-- [ ] Redis integration for caching & presence (Next Step).
-- [ ] Unit & Integration testing (Jest/Supertest).
+- [x] Redis integration for caching & presence.
+- [ ] Unit & Integration testing (Jest/Supertest) (Next Step).
 - [ ] Production deployment setup.
 
 ---

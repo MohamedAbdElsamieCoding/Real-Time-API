@@ -1,9 +1,11 @@
-import app from "./app";
+import app from "./app.js";
 import "dotenv/config";
-import { connectDb } from "./config/db";
+import { connectDb } from "./config/db.js";
 import http from "http";
 import { Server } from "socket.io";
-import { initSockets } from "./sockets";
+import { initSockets } from "./sockets/index.js";
+import { connectRedis, pubClient, subClient } from "./config/redis.js";
+import { createAdapter } from "@socket.io/redis-adapter";
 
 const PORT = process.env.PORT || 5000;
 
@@ -15,7 +17,11 @@ const io = new Server(server, {
     credentials: true,
   },
 });
-initSockets(io);
+(async () => {
+  await connectRedis();
+  io.adapter(createAdapter(pubClient, subClient));
+  initSockets(io);
+})();
 
 const startServer = async () => {
   await connectDb();
