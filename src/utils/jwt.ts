@@ -16,7 +16,7 @@ export const generateAccessToken = (userId: string): string => {
 };
 
 export const generateRefreshToken = (userId: string): string => {
-  return jwt.sign({ userId }, REFRESH_SECRET, {
+  return jwt.sign({ id: userId }, REFRESH_SECRET, {
     expiresIn: REFRESH_EXPIRES_IN,
   });
 };
@@ -30,9 +30,11 @@ export const verifyAccessToken = (token: string) => {
   }
 };
 
-export const verifyRefreshToken = (token: string) => {
+export const verifyRefreshToken = (
+  token: string,
+): RefreshTokenPayload | null => {
   try {
-    return jwt.verify(token, REFRESH_SECRET);
+    return jwt.verify(token, REFRESH_SECRET) as RefreshTokenPayload;
   } catch {
     return null;
   }

@@ -9,10 +9,15 @@ export const sendResponse = <T>(
   statusCode: number,
   message: string,
   data?: T,
-  meta?: Record<string, unknown>
+  meta?: Record<string, unknown>,
 ): Response => {
   const body: ApiResponse<T> = {
-    status: statusCode < 400 ? httpStatusText.SUCCESS : httpStatusText.ERROR,
+    status:
+      statusCode < 400
+        ? httpStatusText.SUCCESS
+        : statusCode < 500
+          ? httpStatusText.FAIL
+          : httpStatusText.ERROR,
     message,
     data: data ?? null,
     ...(meta && { meta }),
@@ -24,7 +29,7 @@ export const sendAuthResponse = async (
   res: Response,
   user: IAuth,
   statusCode: number,
-  message: string
+  message: string,
 ) => {
   const accessToken = generateAccessToken(user._id.toString());
   const refreshToken = generateRefreshToken(user._id.toString());

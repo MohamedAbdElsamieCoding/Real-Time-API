@@ -40,6 +40,7 @@ paths:
       responses:
         201:
           description: User created successfully
+
   /api/v1/auth/login:
     post:
       tags:
@@ -58,6 +59,29 @@ paths:
       responses:
         200:
           description: Login successful
+
+  /api/v1/auth/refresh:
+    post:
+      tags:
+        - Auth
+      summary: Refresh Access Token
+      description: Returns a new access token. Requires the refreshToken HTTP-only cookie.
+      responses:
+        200:
+          description: Token refreshed successfully
+        401:
+          description: Invalid or missing refresh token
+
+  /api/v1/auth/logout:
+    post:
+      tags:
+        - Auth
+      summary: User Logout
+      description: Clears the refreshToken HTTP-only cookie.
+      responses:
+        200:
+          description: Logged out successfully
+
   /api/v1/conversations:
     get:
       tags:
@@ -83,10 +107,8 @@ paths:
               required: [participantId]
               properties:
                 participantId:
-                  {
-                    type: string,
-                    description: "The ID of the user to chat with",
-                  }
+                  type: string
+                  description: "The ID of the user to chat with"
       responses:
         201:
           description: Conversation ready
