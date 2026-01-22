@@ -9,6 +9,8 @@ RUN npm run build
 # Production
 FROM node:18-alpine
 WORKDIR /app
+ENV NODE_ENV=production
+ENV REDIS_URL=redis://redis:6379
 COPY package*.json ./
 RUN npm install --omit=dev
 COPY --from=builder /app/dist ./dist

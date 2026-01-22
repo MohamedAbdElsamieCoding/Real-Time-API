@@ -1,5 +1,14 @@
+console.log(
+  `[Pre-Env] REDIS_URL from system: ${process.env.REDIS_URL || "undefined"}`,
+);
+console.log(
+  `[Pre-Env] NODE_ENV from system: ${process.env.NODE_ENV || "undefined"}`,
+);
+
 import "dotenv/config";
+
 console.log(`[Env] Environment: ${process.env.NODE_ENV || "development"}`);
+console.log(`[Env] REDIS_URL: ${process.env.REDIS_URL || "undefined"}`);
 import app from "./app.js";
 import { connectDb } from "./config/db.js";
 import http from "http";
