@@ -1,12 +1,7 @@
 import { createClient } from "redis";
 
-const redisUrl = process.env.REDIS_URL || "redis://127.0.0.1:6379";
-console.log(`[Redis Config] Using URL: ${redisUrl}`);
-if (!process.env.REDIS_URL) {
-  console.log(
-    "[Redis Config] REDIS_URL not found in environment, falling back to 127.0.0.1",
-  );
-}
+const redisUrl = process.env.REDIS_URL;
+if (!redisUrl) console.log(`[Redis Config] Using URL: ${redisUrl}`);
 
 export const redis = createClient({
   url: redisUrl,
