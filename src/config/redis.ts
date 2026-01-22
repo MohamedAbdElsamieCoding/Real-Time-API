@@ -1,14 +1,17 @@
 import { createClient } from "redis";
 
+const redisUrl = process.env.REDIS_URL || "redis://localhost:6379";
+console.log(`Connecting to Redis at: ${redisUrl}`);
+
 export const redis = createClient({
-  url: process.env.REDIS_URL,
+  url: redisUrl,
 });
 
 export const pubClient = redis.duplicate();
 export const subClient = redis.duplicate();
 
 redis.on("connect", () => {
-  console.log("Redis connected");
+  console.log(`Redis client connected to ${redisUrl}`);
 });
 
 redis.on("error", (err) => {
@@ -16,11 +19,16 @@ redis.on("error", (err) => {
 });
 
 export const connectRedis = async () => {
-  if (!redis.isOpen) {
-    await Promise.all([
-      redis.connect(),
-      pubClient.connect(),
-      subClient.connect(),
-    ]);
+  try {
+    if (!redis.isOpen) {
+      await Promise.all([
+        redis.connect(),
+        pubClient.connect(),
+        subClient.connect(),
+      ]);
+    }
+  } catch (err) {
+    console.error("Failed to connect to Redis:", err);
+    process.exit(1);
   }
 };
