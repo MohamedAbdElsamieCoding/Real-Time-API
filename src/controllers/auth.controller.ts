@@ -1,10 +1,10 @@
-import { asyncHandler } from "../middlewares/async-handler";
+import { asyncHandler } from "../middlewares/async-handler.js";
 import type { Request, Response, NextFunction } from "express";
-import { Auth } from "../models/auth.model";
-import { AppError } from "../utils/app-error";
-import { httpStatusText } from "../utils/http-status-text";
-import { sendAuthResponse, sendResponse } from "../utils/send-response";
-import { generateAccessToken, verifyRefreshToken } from "../utils/jwt";
+import { Auth } from "../models/auth.model.js";
+import { AppError } from "../utils/app-error.js";
+import { httpStatusText } from "../utils/http-status-text.js";
+import { sendAuthResponse, sendResponse } from "../utils/send-response.js";
+import { generateAccessToken, verifyRefreshToken } from "../utils/jwt.js";
 
 export const register = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {

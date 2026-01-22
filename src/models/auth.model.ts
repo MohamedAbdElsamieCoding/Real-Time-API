@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 import bcrypt from "bcrypt";
-import { IAuth } from "../types/auth";
+import { IAuth } from "../types/auth.js";
 
 const authSchema = new Schema<IAuth>(
   {
@@ -30,7 +30,7 @@ const authSchema = new Schema<IAuth>(
       select: false,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 //  Hash password while creating model

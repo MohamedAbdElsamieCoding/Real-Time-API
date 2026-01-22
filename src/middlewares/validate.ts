@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { ZodObject, ZodError } from "zod";
-import { AppError } from "../utils/app-error";
-import { httpStatusText } from "../utils/http-status-text";
+import { AppError } from "../utils/app-error.js";
+import { httpStatusText } from "../utils/http-status-text.js";
 
 export const validate = (schema: ZodObject) => {
   return async (req: Request, _res: Response, next: NextFunction) => {

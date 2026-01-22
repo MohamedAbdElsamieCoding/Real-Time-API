@@ -1,8 +1,8 @@
 import { Response } from "express";
-import { ApiResponse } from "../types/api-response";
-import { httpStatusText } from "./http-status-text";
-import { IAuth } from "../types/auth";
-import { generateAccessToken, generateRefreshToken } from "./jwt";
+import { ApiResponse } from "../types/api-response.js";
+import { httpStatusText } from "./http-status-text.js";
+import { IAuth } from "../types/auth.js";
+import { generateAccessToken, generateRefreshToken } from "./jwt.js";
 
 export const sendResponse = <T>(
   res: Response,

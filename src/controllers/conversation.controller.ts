@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { asyncHandler } from "../middlewares/async-handler";
-import { Conversation } from "../models/conversation.model";
-import { sendResponse } from "../utils/send-response";
+import { asyncHandler } from "../middlewares/async-handler.js";
+import { Conversation } from "../models/conversation.model.js";
+import { sendResponse } from "../utils/send-response.js";
 
 export const conversationCreate = asyncHandler(
   async (req: Request, res: Response, _next: NextFunction) => {

@@ -2,8 +2,8 @@ import { Router } from "express";
 import {
   conversationCreate,
   getMyConversations,
-} from "../controllers/conversation.controller";
-import { protect } from "../middlewares/protect";
+} from "../controllers/conversation.controller.js";
+import { protect } from "../middlewares/protect.js";
 const router = Router();
 // Protect ALL routes in this file
 router.use(protect);

@@ -4,9 +4,9 @@ import {
   logout,
   refreshToken,
   register,
-} from "../controllers/auth.controller";
-import { validate } from "../middlewares/validate";
-import { LoginSchema, registerSchema } from "../validations/auth.validate";
+} from "../controllers/auth.controller.js";
+import { validate } from "../middlewares/validate.js";
+import { LoginSchema, registerSchema } from "../validations/auth.validate.js";
 
 const router = Router();
 
