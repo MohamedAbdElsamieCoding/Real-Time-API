@@ -1,4 +1,5 @@
 import "dotenv/config";
+console.log(`[Env] Environment: ${process.env.NODE_ENV || "development"}`);
 import app from "./app.js";
 import { connectDb } from "./config/db.js";
 import http from "http";
